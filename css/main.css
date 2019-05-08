@@ -1,0 +1,61 @@
+:root {
+    /* Fonts */
+    --sans-font: 'Roboto', sans-serif;
+    --serif-font: 'Cambria', serif;
+
+    /* Colors */
+    --dark-red: #860000;
+    --light-gray: #cccccc;
+    --dark: #444444;
+}
+
+p {
+    font-family: var(--sans-font);
+    color: var(--dark);
+}
+
+
+
+
+
+:root {
+    --sans-font: 'Nunito Sans', sans-serif;
+    --header-font: 'Gugi', cursive;
+    --dark: #444444;
+    --darker: #222222;
+    --light: #999888;
+}
+
+body {
+    font-family: var(--sans-font);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--header-font);
+    color: var(--darker);
+}
+
+h5,
+h6,
+p,
+ol,
+ul,
+li,
+th,
+td,
+tr {
+    font-family: var(--sans-font);
+    color: var(--dark);
+}
+
+.container {
+    margin: 3rem;
+    text-align: left;
+}
+
+p.subtitle {
+    color: var(--light);
+}
