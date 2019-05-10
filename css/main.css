@@ -1,29 +1,11 @@
 :root {
-    /* Fonts */
-    --sans-font: 'Roboto', sans-serif;
-    --serif-font: 'Cambria', serif;
-
-    /* Colors */
-    --dark-red: #860000;
-    --light-gray: #cccccc;
-    --dark: #444444;
-}
-
-p {
-    font-family: var(--sans-font);
-    color: var(--dark);
-}
-
-
-
-
-
-:root {
     --sans-font: 'Nunito Sans', sans-serif;
     --header-font: 'Gugi', cursive;
     --dark: #444444;
     --darker: #222222;
-    --light: #999888;
+    --light: #d3d2c7;
+    --green: #729C61;
+    --dark-red: #cc1818;
 }
 
 body {
@@ -58,4 +40,46 @@ tr {
 
 p.subtitle {
     color: var(--light);
+}
+
+li.completed {
+    color: var(--light);
+}
+
+.incomp-todos {
+    font-size: 1.2rem;
+    color: var(--green);
+}
+
+button.btn {
+    font-family: var(--header-font);
+    border-radius: 5px;
+    padding: 0.7rem 1rem;
+    margin: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button.add {
+    background-color: var(--light);
+    border: 1px solid var(--light);
+    color: var(--dark);
+}
+
+button.add:hover {
+    background-color: var(--darker);
+    border: 1px solid var(--darker);
+    color: var(--green);
+}
+
+button.clear {
+    background-color: var(--dark-red);
+    border: 1px solid var(--dark-red);
+    color: var(--light);
+}
+
+button.clear:hover {
+    background-color: var(--light);
+    border: 1px solid var(--light);
+    color: var(--dark);
 }
