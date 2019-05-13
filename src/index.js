@@ -16,7 +16,7 @@ let myTodos = [{
     },
     {
         text: 'Fifth todo',
-        completed: true
+        completed: false
     },
 ];
 
@@ -73,3 +73,13 @@ addBtn.addEventListener('click', (event) => {
         child = e.lastElementChild;
     }
 });
+
+
+// GETS THE AMOUNT OF INCOMPLETE TODOS:
+const incompleteTodos = myTodos.filter((todo) => {
+    return !todo.completed;
+});
+// PRINTS THE NUMBER OF INCOMPLETE TODOS ON THE PAGE:
+const summary = document.createElement('span');
+summary.textContent = incompleteTodos.length;
+document.querySelector('.incomp-todos').appendChild(summary);

@@ -30,7 +30,7 @@ paragraphs.forEach((p) => {
 
     // Adds content of to each paragraph '***********'.
     // p.textContent = '************';
-})
+});
 
 const incompleteTodos = todos.filter((todo) => {
     return !todo.completed;
@@ -46,7 +46,7 @@ todos.forEach((todo) => {
         listItem.textContent = todo.text;
         document.querySelector('ul.todos').appendChild(listItem);
     }
-})
+});
 
 // Add content to page:
 // const newParagraph = document.createElement('p');
