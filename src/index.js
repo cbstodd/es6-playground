@@ -25,6 +25,11 @@ const newTodo = {
     completed: false
 };
 
+// CREATE NEW TODOS:
+document.querySelector('#search-text').addEventListener('change');
+
+
+// DISPLAY TODOS ON SCREEN:
 myTodos.forEach((todo) => {
     if (!todo.completed) {
         const listItem = document.createElement('li');

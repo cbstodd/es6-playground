@@ -83,3 +83,10 @@ button.clear:hover {
     border: 1px solid var(--light);
     color: var(--dark);
 }
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    font-family: var(--sans-font);
+    font-size: 1rem;
+}
