@@ -1,13 +1,11 @@
 :root {
-    --sans-font: 'Varela Round', sans-serif;
+    --sans-font: 'Nunito Sans', sans-serif;
     --header-font: 'Gugi', cursive;
     --dark: #444444;
     --darker: #222222;
     --light: #d3d2c7;
-    --lightest: #f1f1f1;
     --green: #729C61;
     --dark-red: #cc1818;
-    --baby-blue: #69BAE0;
 }
 
 body {
@@ -15,13 +13,13 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
     font-family: var(--header-font);
     color: var(--darker);
 }
 
-h3,
-h4,
 h5,
 h6,
 p,
@@ -54,7 +52,7 @@ li.completed {
 }
 
 button.btn {
-    font-family: var(--sans-font);
+    font-family: var(--header-font);
     border-radius: 5px;
     padding: 0.7rem 1rem;
     margin: 1rem;
@@ -102,14 +100,4 @@ input[type="text"]#addTodoInput {
     font-size: 1rem;
     border: 1px solid var(--light);
     border-left: 3px solid var(--green);
-}
-
-i.fa-square {
-    padding-right: 1rem;
-}
-
-#todos>p {
-    /* border-bottom: 1px solid var(--lightest);
-    border-left: 5px solid var(--lightest); */
-    /* padding: 0.5rem 1rem 1rem 1rem; */
 }

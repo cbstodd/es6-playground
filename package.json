@@ -2,9 +2,9 @@
   "name": "playground",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "notes-app/index.js",
   "scripts": {
-    "dev": "lite-server",
+    "notes": "lite-server ./notes-app/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Colin Stodd <https://colinstodd.com>",

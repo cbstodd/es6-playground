@@ -5,20 +5,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>JavaScript Playground</title>
+        <title>Notes App</title>
         <!-- Silence Favicon Error -->
         <link rel="icon" href="data:;base64,iVBORwOKGO=" />
-        <link href="https://fonts.googleapis.com/css?family=Gugi|Nunito+Sans|Varela+Round" rel="stylesheet">
-        <link rel="stylesheet" href="./css/main.css">
-        <link rel="stylesheet"
-              href="https://pro.fontawesome.com/releases/v5.5.0/css/all.css"
-              integrity="sha384-j8y0ITrvFafF4EkV1mPW0BKm6dp3c+J9Fky22Man50Ofxo2wNe5pT1oZejDH9/Dt"
-              crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Gugi|Nunito+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="main.css">
     </head>
 
     <body>
         <div class="container">
-            <h1>ES6 Playground</h1>
+            <h1>Notes App</h1>
 
             <p>
                 <input type="text"
@@ -34,21 +30,18 @@
 
             <p>
                 <button class="btn add" id="addTodoBtn">
-                    <i class="fa fa-plus"></i> Add Todo
+                    + Add Todo
                 </button>
                 <button class="btn clear" id="clearTodos">
-                    <i class="fa fa-trash-alt"></i> Clear
+                    &times; Clear
                 </button>
             </p>
 
-            <p><i>You Currently have <span class="incomp-todos"></span> incomplete todos.</i></p>
-            <hr>
+            <p>You Currently have <span class="incomp-todos"></span> incomplete todos.</p>
 
-            <div id="todos">
-                <!--~ Todos Rendered here ~-->
-            </div>
+            <ul class="todos"></ul>
         </div>
-        <script src="./src/index.js" type="text/javascript"></script>
+        <script src="index.js" type="text/javascript"></script>
     </body>
 
 </html>
