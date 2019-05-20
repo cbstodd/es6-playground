@@ -68,7 +68,7 @@ renderTodos(todoList, filters);
 
 const addTodo = (todoBody) => {
     const randNum = Math.floor((Math.random() * 1999999) + 1);
-    newTodo = {
+    const newTodo = {
         id: `${randNum}`,
         body: todoBody,
         completed: false
