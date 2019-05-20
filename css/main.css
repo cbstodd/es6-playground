@@ -1,5 +1,6 @@
 :root {
-    --sans-font: 'Varela Round', sans-serif;
+    --sans-font: 'Roboto', sans-serif;
+    --subheader-font: 'Roboto Condensed', sans-serif;
     --header-font: 'Gugi', cursive;
     --dark: #444444;
     --darker: #222222;
@@ -23,7 +24,11 @@ h2 {
 h3,
 h4,
 h5,
-h6,
+h6 {
+    font-family: var(--subheader-font);
+    color: var(--dark);
+}
+
 p,
 ol,
 ul,
@@ -99,20 +104,20 @@ button.clear:hover {
 
 input[type="text"]#searchTodoInput {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     font-family: var(--sans-font);
-    font-size: 1rem;
+    font-size: 0.8rem;
     border: 1px solid var(--light);
     /* border-left: 3px solid var(--dark); */
 }
 
 input[type="text"]#addTodoInput {
     min-width: 100%;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     font-family: var(--sans-font);
-    font-size: 1rem;
+    font-size: 0.8rem;
     border: 1px solid var(--light);
-    border-left: 3px solid var(--green);
+    border-left: 3px solid var(--light);
 }
 
 i.fa-square {

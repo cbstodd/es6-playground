@@ -43,7 +43,7 @@ const renderIncompleteTodos = () => {
     numOfIncompTodos.innerHTML = incompleteTodos.length;
     document.getElementById('incompleteTodos').appendChild(numOfIncompTodos);
 };
-
+renderIncompleteTodos();
 
 // Renders todos to page:
 const renderTodos = (todos, filters) => {
@@ -63,7 +63,6 @@ const renderTodos = (todos, filters) => {
         }
     });
 };
-renderIncompleteTodos();
 renderTodos(todoList, filters);
 
 const addTodo = (todoBody) => {
