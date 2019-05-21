@@ -1,12 +1,12 @@
 let todoList = [{
         id: `${Math.floor((Math.random() * 1999999) + 1)}`,
         body: 'Make Coffee',
-        completed: false
+        completed: true
     },
     {
         id: `${Math.floor((Math.random() * 1999999) + 1)}`,
         body: 'Uncover porch cushions',
-        completed: false
+        completed: true
     },
     {
         id: `${Math.floor((Math.random() * 1999999) + 1)}`,
@@ -26,12 +26,13 @@ let todoList = [{
 ];
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    hideCompleted: false
 };
 
 
 // GETS THE AMOUNT OF INCOMPLETE TODOS:
-const renderIncompleteTodos = () => {
+function renderNumOfIncompleteTodos() {
     const incompleteTodos = todoList.filter((todo) => {
         return !todo.completed;
     });
@@ -42,10 +43,10 @@ const renderIncompleteTodos = () => {
 
     numOfIncompTodos.innerHTML = incompleteTodos.length;
     document.getElementById('incompleteTodos').appendChild(numOfIncompTodos);
-};
-renderIncompleteTodos();
+}
+renderNumOfIncompleteTodos();
 
-// Renders todos to page:
+// RENDERS ALL TODOS TO PAGE:
 const renderTodos = (todos, filters) => {
     const filteredTodos = todos.filter((todo) => {
         return todo.body.toLowerCase().includes(
@@ -55,15 +56,32 @@ const renderTodos = (todos, filters) => {
 
     document.getElementById('todos').innerHTML = '';
 
-    filteredTodos.forEach((todo) => {
+    filteredTodos.map((todo) => {
+        const todoItem = document.createElement('p');
         if (!todo.completed) {
-            const todoItem = document.createElement('p');
             todoItem.innerHTML = `<i class="fal fa-square"></i> ${todo.body}`;
-            document.querySelector('#todos').appendChild(todoItem);
+        } else {
+            todoItem.innerHTML = `<s class="completed"><i class="fal fa-square"></i> ${todo.body}</s>`;
         }
+        document.querySelector('#todos').appendChild(todoItem);
     });
 };
 renderTodos(todoList, filters);
+
+// RENDERS ALL INCOMPLETE TODOS:
+const renderIncompleteTodo = (todos, filters) => {
+    const filteredTodos = todos
+        .filter((todo) => {
+            return todo.body.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed;
+        });
+
+    document.getElementById('todos').innerHTML = '';
+    filteredTodos.map((todo) => {
+        const todoItem = document.createElement('p');
+        todoItem.innerHTML = `<i class="fal fa-square"></i> ${todo.body}`;
+        document.querySelector('#todos').appendChild(todoItem);
+    });
+};
 
 const addTodo = (todoBody) => {
     const randNum = Math.floor((Math.random() * 1999999) + 1);
@@ -74,8 +92,13 @@ const addTodo = (todoBody) => {
     };
     todoList.push(newTodo);
     console.table(todoList);
-    renderIncompleteTodos();
-    renderTodos(todoList, filters);
+    renderNumOfIncompleteTodos();
+    if (filters.hideCompleted) {
+        renderIncompleteTodo(todoList, filters);
+    } else {
+        renderTodos(todoList, filters);
+    }
+
 };
 
 const alertBtnMsg = (_newTodoBody) => {
@@ -91,7 +114,21 @@ const alertBtnMsg = (_newTodoBody) => {
 // ####################### DOM EVENT HANDLERS ######################
 document.getElementById('searchTodoInput').addEventListener('input', (e) => {
     filters.searchText = e.target.value.toLowerCase();
-    renderTodos(todoList, filters);
+    if (filters.hideCompleted) {
+        renderIncompleteTodo(todoList, filters);
+    } else {
+        renderTodos(todoList, filters);
+    }
+});
+
+document.getElementById('hideCompleted').addEventListener('change', (e) => {
+    if (e.target.checked) {
+        filters.hideCompleted = true;
+        renderIncompleteTodo(todoList, filters);
+    } else {
+        filters.hideCompleted = false;
+        renderTodos(todoList, filters);
+    }
 });
 
 // Add New Todo Form:

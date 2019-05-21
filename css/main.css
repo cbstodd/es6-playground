@@ -129,3 +129,12 @@ i.fa-square {
     border-left: 5px solid var(--lightest); */
     /* padding: 0.5rem 1rem 1rem 1rem; */
 }
+
+label.checkbox,
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+s.completed {
+    color: var(--green);
+}
