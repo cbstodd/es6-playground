@@ -6,8 +6,8 @@
     --darker: #222222;
     --light: #d3d2c7;
     --lightest: #f1f1f1;
-    --green: #729C61;
-    --dark-red: #cc1818;
+    --green: #3cbbb0;
+    --dark-red: #680000;
     --baby-blue: #69BAE0;
 }
 
@@ -75,22 +75,35 @@ button.btn {
     margin: 1rem;
     font-size: 1rem;
     cursor: pointer;
+    box-shadow: var(--green) 0px -3px 0px 0px inset;
+}
+
+button.btn-sm {
+    font-family: var(--sans-font);
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    margin: 1rem;
+    font-size: 0.7rem;
+    cursor: pointer;
 }
 
 button.add {
     background-color: var(--light);
     border: 1px solid var(--light);
-    color: var(--dark);
+    color: var(--green);
     margin-left: 0;
+    box-shadow: 0;
+    box-shadow: var(--green) 0px -3px 0px 0px inset;
 }
 
 button.add:hover {
-    background-color: var(--darker);
-    border: 1px solid var(--darker);
-    color: var(--green);
+    background-color: var(--light);
+    border: 1px solid var(--light);
+    color: var(--dark);
+    box-shadow: var(--dark) 0px -3px 0px 0px inset;
 }
 
-button.clear {
+button.clear, button.delete {
     background-color: var(--dark-red);
     border: 1px solid var(--dark-red);
     color: var(--light);
@@ -118,6 +131,7 @@ input[type="text"]#addTodoInput {
     font-size: 0.8rem;
     border: 1px solid var(--light);
     border-left: 3px solid var(--light);
+    box-shadow: var(--green) 0px -3px 0px 0px inset;
 }
 
 i.fa-square {
@@ -137,4 +151,8 @@ input[type="checkbox"] {
 
 s.completed {
     color: var(--green);
+}
+
+#sort {
+    margin-left: 2rem;
 }
