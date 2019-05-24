@@ -80,14 +80,6 @@ button.btn {
     box-shadow: var(--green) 0px -3px 0px 0px inset;
 }
 
-button.btn-sm {
-    font-family: var(--sans-font);
-    border-radius: 5px;
-    padding: 0.2rem 0.5rem;
-    margin: 1rem;
-    font-size: 0.7rem;
-    cursor: pointer;
-}
 
 button.add {
     background-color: var(--light);
@@ -130,12 +122,21 @@ label {
     margin-right: 2drem;
 }
 
+#todos > div {
+    border-top: 1px solid var(--light);
+    padding: 0.70rem 0;
+}
+
 #todos>div>button {
     margin-left: 1rem;
     color: var(--dark-red);
-    border: 1px solid var(--light);
+    border: 1px solid transparent;
+    background-color: transparent;
     cursor: pointer;
+    float: right;
+
 }
 #todos>div>span {
     margin-left: 1rem;
+    text-align: right;
 }

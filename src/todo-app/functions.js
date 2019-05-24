@@ -1,5 +1,4 @@
 /* ##################### FUNCTIONS ##################### */
-
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
     const filteredTodos = todos.filter((todo) => {
@@ -26,19 +25,24 @@ const generateTodoDOM = (todo) => {
     const todoEl = document.createElement('div');
     const checkbox = document.createElement('input');
     const todoText = document.createElement('span');
-    const removeButton = document.createElement('button');
+    const deletedButton = document.createElement('button');
 
-    // Setup todo checkbox
+    // Render todo checkbox
     checkbox.setAttribute('type', 'checkbox');
     todoEl.appendChild(checkbox);
 
-    // Setup the todo body
+    // Render the todo body
     todoText.textContent = todo.body;
     todoEl.appendChild(todoText);
 
-    // Setup the remove button
-    removeButton.innerHTML = '<i class="fa fa-trash-alt"></i>';
-    todoEl.appendChild(removeButton);
+    // Render the Delete button
+    deletedButton.innerHTML = '<i class="fa fa-trash-alt" title="Delete Todo"></i>';
+    todoEl.appendChild(deletedButton);
+    deletedButton.addEventListener('click', (e) => {
+        deleteTodo(todo.id);
+        renderTodos(todos, filters);
+    });
+
 
     return todoEl;
 };
@@ -46,7 +50,7 @@ const generateTodoDOM = (todo) => {
 // Get the DOM elements for list subtitle
 const generateSummaryDOM = (incompleteTodos) => {
     const subtitle = document.createElement('p');
-    subtitle.innerHTML = `<p class="subtitle">You have ${incompleteTodos.length} todos left</p>`;
+    subtitle.innerHTML = `<p class="subtitle">You have <u>${incompleteTodos.length}</u> todos left</p>`;
     return subtitle;
 };
 
@@ -61,9 +65,9 @@ const alertBtnMsg = (_newTodoBody) => {
 
 
 const addTodo = (todoBody) => {
-    const randNum = Math.floor((Math.random() * 1999999) + 1);
+    const _id = uuidv4();
     const newTodo = {
-        id: `${randNum}`,
+        id: `${_id}`,
         body: todoBody,
         completed: false,
         createdAt: new Date()
@@ -71,4 +75,13 @@ const addTodo = (todoBody) => {
     todos.push(newTodo);
     saveTodosToLocalStorage(todos);
     alertBtnMsg(todoBody);
+};
+
+const deleteTodo = (id) => {
+    const remainingTodos = todos.filter((todo) => {
+        return todo.id !== id;
+    });
+    todos = remainingTodos;
+    saveTodosToLocalStorage(todos);
+    renderTodos(todos, filters);
 };

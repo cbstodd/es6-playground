@@ -1,5 +1,5 @@
 /* ##################### INDEX (CALLS) ##################### */
-const todos = getSavedTodos();
+let todos = getSavedTodos();
 const filters = getFilters();
 
 renderTodos(todos, filters);
