@@ -46,7 +46,9 @@ tr {
 }
 
 p.subtitle {
-    color: var(--light);
+    color: var(--dark);
+    font-family: var(--subheader-font);
+    font-size: 1.3rem;
 }
 
 li.completed {
@@ -56,7 +58,7 @@ li.completed {
 .card {
     background-color: var(--lightest);
     border-radius: 5px;
-    display: flex;
+    width: 100%;
 }
 
 .card-body {
@@ -103,20 +105,8 @@ button.add:hover {
     box-shadow: var(--dark) 0px -3px 0px 0px inset;
 }
 
-button.clear, button.delete {
-    background-color: var(--dark-red);
-    border: 1px solid var(--dark-red);
-    color: var(--light);
-}
-
-button.clear:hover {
-    background-color: var(--light);
-    border: 1px solid var(--light);
-    color: var(--dark);
-}
-
 input[type="text"]#searchTodoInput {
-    width: 100%;
+    width: 90%;
     padding: 0.5rem 1rem;
     font-family: var(--sans-font);
     font-size: 0.8rem;
@@ -125,7 +115,8 @@ input[type="text"]#searchTodoInput {
 }
 
 input[type="text"]#addTodoInput {
-    min-width: 100%;
+    width: 91%;
+    display: block;
     padding: 0.5rem 1rem;
     font-family: var(--sans-font);
     font-size: 0.8rem;
@@ -134,25 +125,17 @@ input[type="text"]#addTodoInput {
     box-shadow: var(--green) 0px -3px 0px 0px inset;
 }
 
-i.fa-square {
-    padding-right: 1rem;
+label {
+    cursor: pointer;
+    margin-right: 2drem;
 }
 
-#todos>p {
-    /* border-bottom: 1px solid var(--lightest);
-    border-left: 5px solid var(--lightest); */
-    /* padding: 0.5rem 1rem 1rem 1rem; */
-}
-
-label.checkbox,
-input[type="checkbox"] {
+#todos>div>button {
+    margin-left: 1rem;
+    color: var(--dark-red);
+    border: 1px solid var(--light);
     cursor: pointer;
 }
-
-s.completed {
-    color: var(--green);
-}
-
-#sort {
-    margin-left: 2rem;
+#todos>div>span {
+    margin-left: 1rem;
 }

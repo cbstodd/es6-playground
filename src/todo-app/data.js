@@ -1,5 +1,6 @@
 // ####################### DATA ##########################
-const addTodosToLocalStorage = (todos) => {
+// Save todos to localStorage
+const saveTodosToLocalStorage = (todos) => {
     if (todos) {
         localStorage.setItem('todos', JSON.stringify(todos));
     } else {

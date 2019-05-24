@@ -1,11 +1,30 @@
 /* ##################### INDEX (CALLS) ##################### */
 const todos = getSavedTodos();
 const filters = getFilters();
-searchTodoInput();
-hideCompleted();
-newTodoForm();
-sortTodos();
-renderNumOfIncompleteTodos();
+
 renderTodos(todos, filters);
-clickDeleteButton();
-clickCompleteCheckbox();
+
+document.getElementById('searchTodoInput').addEventListener('input', (e) => {
+    filters.searchText = e.target.value;
+    renderTodos(todos, filters);
+});
+
+document.getElementById('newTodoForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // 1. Adds todo to list; 2. Alerts Success; 3. Clears form input:
+    const newTodoBody = e.target.elements.newTodo.value;
+    if (newTodoBody) {
+        addTodo(newTodoBody);
+    } else {
+        console.warn('No Todo was provided, please type a todo before adding.');
+        alert('No Todo was provided, please type a todo before adding.');
+    }
+    // addTodo(todos);
+    renderTodos(todos, filters);
+    e.target.elements.newTodo.value = '';
+});
+
+document.getElementById('hideCompleted').addEventListener('change', (e) => {
+    filters.hideCompleted = e.target.checked;
+    renderTodos(todos, filters);
+});

@@ -1,79 +1,64 @@
 /* ##################### FUNCTIONS ##################### */
 
-// GETS THE AMOUNT OF INCOMPLETE TODOS:
-function renderNumOfIncompleteTodos() {
-    const incompleteTodos = todos.filter((todo) => {
+// Render application todos based on filters
+const renderTodos = (todos, filters) => {
+    const filteredTodos = todos.filter((todo) => {
+        const searchTextMatch = todo.body.toLowerCase().includes(filters.searchText.toLowerCase());
+        const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
+
+        return searchTextMatch && hideCompletedMatch;
+    });
+
+    const incompleteTodos = filteredTodos.filter(function (todo) {
         return !todo.completed;
     });
 
-    document.getElementById('incompleteTodos').innerHTML = '';
-    // PRINTS THE NUMBER OF INCOMPLETE TODOS ON THE PAGE:
-    const numOfIncompTodos = document.createElement('span');
+    document.querySelector('#todos').innerHTML = '';
+    document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos));
 
-    numOfIncompTodos.innerHTML = incompleteTodos.length;
-    document.getElementById('incompleteTodos').appendChild(numOfIncompTodos);
-}
-
-
-const deleteTodo = (todos, id) => {
-    const remainingTodos = todos.filter((todo) => {
-        return todo.id !== id;
-    });
-    todos = remainingTodos;
-    addTodosToLocalStorage(todos);
-    renderTodos(todos, filters);
-};
-
-
-// RENDERS ALL TODOS TO PAGE:
-const renderTodos = (todos, filters) => {
-    const filteredTodos = todos.filter((todo) => {
-        return todo.body.toLowerCase().includes(
-            filters.searchText.toLowerCase()
-        );
-    });
-
-    document.getElementById('todos').innerHTML = '';
-
-    filteredTodos.map((todo) => {
-        const todoItem = document.createElement('p');
-        if (!todo.completed) {
-            todoItem.innerHTML = `<input type="checkbox" id="completeCheckbox" value="${todo.id}">&nbsp;${todo.body}&nbsp;<a value="${todo.id}" id="deleteBtn" class="delete"><i class="fa fa-trash"></i> Delete</a>`;
-        } else {
-            todoItem.innerHTML = `<s class="completed"><input type="checkbox" id="completeCheckbox" value="${todo.id}">{todo.body}</s>&nbsp;<a value="${todo.id}" id="deleteBtn" class="delete"><i class="fa fa-trash"></i> Delete</a>`;
-        }
-        document.querySelector('#todos').appendChild(todoItem);
-    });
-};
-renderTodos(todos, filters);
-
-
-// RENDERS ALL INCOMPLETE TODOS:
-const renderIncompleteTodo = (todos, filters) => {
-    const filteredTodos = todos.filter((todo) => {
-        const searchTextMatch = todo.body.toLowerCase().includes(filters.searchText.toLowerCase());
-        const hideIncompleteTodos = !todo.completed;
-        return searchTextMatch && hideIncompleteTodos;
-    });
-
-    document.getElementById('todos').innerHTML = '';
-    filteredTodos.map((todo) => {
-        const todoItem = document.createElement('p');
-        todoItem.innerHTML = `<i class="fal fa-square"></i> ${todo.body}`;
-        document.querySelector('#todos').appendChild(todoItem);
+    filteredTodos.forEach((todo) => {
+        document.querySelector('#todos').appendChild(generateTodoDOM(todo));
     });
 };
 
-// RENDERS TODOS ACCORDING TO SORT TYPE:
-// const renderBySortType = (todos, sortType) => {
-//     const lastEdited = todos.map((todo) => {
-//         if (sortType === 'lastEdited') {
+// Get the DOM elements for an individual note
+const generateTodoDOM = (todo) => {
+    const todoEl = document.createElement('div');
+    const checkbox = document.createElement('input');
+    const todoText = document.createElement('span');
+    const removeButton = document.createElement('button');
 
-//         }
-//     });
-//     console.table(lastEdited);
+    // Setup todo checkbox
+    checkbox.setAttribute('type', 'checkbox');
+    todoEl.appendChild(checkbox);
 
-// };
+    // Setup the todo body
+    todoText.textContent = todo.body;
+    todoEl.appendChild(todoText);
+
+    // Setup the remove button
+    removeButton.innerHTML = '<i class="fa fa-trash-alt"></i>';
+    todoEl.appendChild(removeButton);
+
+    return todoEl;
+};
+
+// Get the DOM elements for list subtitle
+const generateSummaryDOM = (incompleteTodos) => {
+    const subtitle = document.createElement('p');
+    subtitle.innerHTML = `<p class="subtitle">You have ${incompleteTodos.length} todos left</p>`;
+    return subtitle;
+};
+
+const alertBtnMsg = (_newTodoBody) => {
+    // Updates text on button (alert):
+    const newTodoBtn = document.getElementById('addTodoBtn');
+    newTodoBtn.textContent = `"${_newTodoBody}" was added!!!`;
+    setTimeout(() => {
+        newTodoBtn.innerHTML = `<i class="fa fa-plus"></i> Add Todo`;
+    }, 2000);
+};
+
 
 const addTodo = (todoBody) => {
     const randNum = Math.floor((Math.random() * 1999999) + 1);
@@ -84,21 +69,6 @@ const addTodo = (todoBody) => {
         createdAt: new Date()
     };
     todos.push(newTodo);
-    addTodosToLocalStorage(todos);
-    renderNumOfIncompleteTodos();
-    if (filters.hideCompleted) {
-        renderIncompleteTodo(todos, filters);
-    } else {
-        renderTodos(todos, filters);
-    }
-
-};
-
-const alertBtnMsg = (_newTodoBody) => {
-    // Updates text on button (alert):
-    const newTodoBtn = document.getElementById('addTodoBtn');
-    newTodoBtn.textContent = `"${_newTodoBody}" was added!!!`;
-    setTimeout(() => {
-        newTodoBtn.innerHTML = `<i class="fa fa-plus"></i> Add Todo`;
-    }, 2000);
+    saveTodosToLocalStorage(todos);
+    alertBtnMsg(todoBody);
 };
