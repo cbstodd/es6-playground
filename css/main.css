@@ -119,9 +119,14 @@ input[type="text"]#addTodoInput {
 
 label {
     cursor: pointer;
-    margin-right: 2drem;
+    margin-right: 2rem;
 }
 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Incomplete Todos */
 #todos > div {
     border-top: 1px solid var(--light);
     padding: 0.70rem 0;
@@ -139,4 +144,29 @@ label {
 #todos>div>span {
     margin-left: 1rem;
     text-align: right;
+}
+
+/* Completed Todos */
+#completedTodos > div {
+    border-top: 1px solid var(--light);
+    padding: 0.70rem 0;
+}
+
+#completedTodos>div>button {
+    margin-left: 1rem;
+    color: var(--dark-red);
+    border: 1px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    float: right;
+
+}
+#completedTodos>div>span {
+    margin-left: 1rem;
+    text-align: right;
+}
+
+.completed {
+    color: var(--light);
+    text-decoration: line-through;
 }

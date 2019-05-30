@@ -1,4 +1,8 @@
 /* ##################### FUNCTIONS ##################### */
+
+/* -------------------------------------
+    RENDERING / FILTERING
+-------------------------------------- */
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
     const filteredTodos = todos.filter((todo) => {
@@ -8,16 +12,25 @@ const renderTodos = (todos, filters) => {
         return searchTextMatch && hideCompletedMatch;
     });
 
-    const incompleteTodos = filteredTodos.filter(function (todo) {
-        return !todo.completed;
-    });
+
 
     document.querySelector('#todos').innerHTML = '';
-    document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos));
-
     filteredTodos.forEach((todo) => {
-        document.querySelector('#todos').appendChild(generateTodoDOM(todo));
+        if (!todo.completed) {
+            document.querySelector('#todos').appendChild(generateTodoDOM(todo));
+        }
     });
+
+    const completedTodos = filteredTodos.filter((todo) => {
+        return todo.completed;
+    });
+
+    document.querySelector('#completedTodos').innerHTML = '';
+    completedTodos.forEach((todo) => {
+        document.querySelector('#completedTodos').appendChild(generateCompletedTodoDOM(todo));
+    });
+
+    generateSummaryDOM(completedTodos);
 };
 
 // Get the DOM elements for an individual note
@@ -30,17 +43,52 @@ const generateTodoDOM = (todo) => {
     // Render todo checkbox
     checkbox.setAttribute('type', 'checkbox');
     todoEl.appendChild(checkbox);
+    checkbox.addEventListener('change', (e) => {
+        toggleCompletedTodo(todo.id);
+        // renderTodos(todos, filters);
+    });
 
     // Render the todo body
     todoText.textContent = todo.body;
     todoEl.appendChild(todoText);
 
     // Render the Delete button
-    deletedButton.innerHTML = '<i class="fa fa-trash-alt" title="Delete Todo"></i>';
+    deletedButton.innerHTML = '<i class="fa fa-trash-alt fa-lg" title="Delete Todo"></i>';
     todoEl.appendChild(deletedButton);
     deletedButton.addEventListener('click', (e) => {
         deleteTodo(todo.id);
-        renderTodos(todos, filters);
+        // renderTodos(todos, filters);
+    });
+
+
+    return todoEl;
+};
+
+const generateCompletedTodoDOM = (todo) => {
+    const todoEl = document.createElement('div');
+    todoEl.setAttribute('class', 'completed');
+    const checkbox = document.createElement('input');
+    const todoText = document.createElement('span');
+    const deletedButton = document.createElement('button');
+
+    // Render todo checkbox
+    checkbox.setAttribute('type', 'checkbox');
+    todoEl.appendChild(checkbox);
+    checkbox.addEventListener('change', (e) => {
+        toggleCompletedTodo(todo.id);
+        // renderTodos(todos, filters);
+    });
+
+    // Render the todo body
+    todoText.textContent = todo.body;
+    todoEl.appendChild(todoText);
+
+    // Render the Delete button
+    deletedButton.innerHTML = '<i class="fa fa-trash-alt fa-lg" title="Delete Todo"></i>';
+    todoEl.appendChild(deletedButton);
+    deletedButton.addEventListener('click', (e) => {
+        deleteTodo(todo.id);
+        // renderTodos(todos, filters);
     });
 
 
@@ -48,9 +96,9 @@ const generateTodoDOM = (todo) => {
 };
 
 // Get the DOM elements for list subtitle
-const generateSummaryDOM = (incompleteTodos) => {
+const generateSummaryDOM = (completedTodos) => {
     const subtitle = document.createElement('p');
-    subtitle.innerHTML = `<p class="subtitle">You have <u>${incompleteTodos.length}</u> todos left</p>`;
+    subtitle.innerHTML = `<p class="subtitle">You have <u>${completedTodos.length}</u> todos left</p>`;
     return subtitle;
 };
 
@@ -64,13 +112,18 @@ const alertBtnMsg = (_newTodoBody) => {
 };
 
 
+/* -------------------------------------
+    CRUD OPERATIONS
+-------------------------------------- */
+
 const addTodo = (todoBody) => {
     const _id = uuidv4();
     const newTodo = {
         id: `${_id}`,
         body: todoBody,
         completed: false,
-        createdAt: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
     };
     todos.push(newTodo);
     saveTodosToLocalStorage(todos);
@@ -79,9 +132,60 @@ const addTodo = (todoBody) => {
 
 const deleteTodo = (id) => {
     const remainingTodos = todos.filter((todo) => {
-        return todo.id !== id;
+        if (todo && id) {
+            return todo.id !== id;
+        } else {
+            console.error('Todo not available');
+            alert('Todo not available');
+            return null;
+        }
     });
     todos = remainingTodos;
     saveTodosToLocalStorage(todos);
     renderTodos(todos, filters);
+};
+
+const toggleCompletedTodo = (id) => {
+    let todo = todos.filter((_todo) => {
+        if (_todo && id) {
+            return _todo.id === id;
+        } else {
+            console.error('Todos or ID not found');
+            return null;
+        }
+    });
+
+    if (todo[0].id && todo[0].body && todo[0].createdAt && (todo[0].completed === false)) {
+        const completedTodo = {
+            id: `${todo[0].id}`,
+            body: todo[0].body,
+            completed: true,
+            createdAt: todo[0].createdAt,
+            updatedAt: new Date()
+        };
+
+        deleteTodo(id);
+        // saveTodosToLocalStorage(todos);
+        todos.push(completedTodo);
+        saveTodosToLocalStorage(todos);
+        renderTodos(todos, filters);
+    } else if (todo[0].id && todo[0].body && todo[0].createdAt && (todo[0].completed === true)) {
+        const completedTodo = {
+            id: `${todo[0].id}`,
+            body: todo[0].body,
+            completed: false,
+            createdAt: todo[0].createdAt,
+            updatedAt: new Date()
+        };
+
+        deleteTodo(id);
+        // saveTodosToLocalStorage(todos);
+        todos.push(completedTodo);
+        saveTodosToLocalStorage(todos);
+        renderTodos(todos, filters);
+    } else {
+        console.error('Todo not available');
+        return null;
+    }
+
 };
