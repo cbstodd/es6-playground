@@ -73,6 +73,7 @@ const generateCompletedTodoDOM = (todo) => {
 
     // Render todo checkbox
     checkbox.setAttribute('type', 'checkbox');
+    checkbox.checked = true;
     todoEl.appendChild(checkbox);
     checkbox.addEventListener('change', (e) => {
         toggleCompletedTodo(todo.id);
