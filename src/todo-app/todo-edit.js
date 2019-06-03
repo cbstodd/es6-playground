@@ -56,6 +56,5 @@ const updateTodo = (todoEditBody) => {
     deleteTodo(todo.id);
     allTodos.push(updatedTodo);
     saveTodosToLocalStorage(allTodos);
-    location.assign('/');
+    renderAlertMsg(`"${todoEditBody}" was updated!`, '/');
 };
-

@@ -29,6 +29,21 @@ const getSavedTodos = () => {
 
 
 
+const renderAlertMsg = (msg, ...redirectPath) => {
+    const alert = document.getElementById('alertMsg');
+    alert.setAttribute('class', 'alert alert-success');
+    alert.innerHTML = `${msg}`;
+    setTimeout(() => {
+        alert.setAttribute('class', '');
+        alert.innerHTML = '';
+    }, 1500);
+    if (redirectPath) {
+        console.log('redirecting');
+        console.log(redirectPath);
+        setTimeout(() => location.assign(`${redirectPath}`), 1550);
+    }
+};
+
 
 // export function data() {
 //     return [{
