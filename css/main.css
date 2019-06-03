@@ -4,6 +4,7 @@
     --header-font: 'Gugi', cursive;
     --dark: #444444;
     --darker: #222222;
+    --gray: #999;
     --light: #d3d2c7;
     --lightest: #f1f1f1;
     --green: #3cbbb0;
@@ -38,6 +39,11 @@ td,
 tr {
     font-family: var(--sans-font);
     color: var(--dark);
+}
+
+a {
+    color: var(--dark);
+    text-decoration: none;
 }
 
 .container {
@@ -97,6 +103,19 @@ button.add:hover {
     box-shadow: var(--dark) 0px -3px 0px 0px inset;
 }
 
+
+input[type="text"] {
+    width: 91%;
+    display: block;
+    padding: 0.5rem 1rem;
+    font-family: var(--sans-font);
+    font-size: 0.8rem;
+    border: 1px solid var(--light);
+    /* border-left: 3px solid var(--light); */
+    box-shadow: var(--green) 0px -3px 0px 0px inset;
+}
+
+
 input[type="text"]#searchTodoInput {
     width: 90%;
     padding: 0.5rem 1rem;
@@ -104,17 +123,7 @@ input[type="text"]#searchTodoInput {
     font-size: 0.8rem;
     border: 1px solid var(--light);
     /* border-left: 3px solid var(--dark); */
-}
-
-input[type="text"]#addTodoInput {
-    width: 91%;
-    display: block;
-    padding: 0.5rem 1rem;
-    font-family: var(--sans-font);
-    font-size: 0.8rem;
-    border: 1px solid var(--light);
-    border-left: 3px solid var(--light);
-    box-shadow: var(--green) 0px -3px 0px 0px inset;
+    box-shadow: var(--light) 0px -3px 0px 0px inset;
 }
 
 label {
@@ -127,7 +136,7 @@ input[type="checkbox"] {
 }
 
 /* Incomplete Todos */
-#todos > div {
+#todos>div {
     border-top: 1px solid var(--light);
     padding: 0.70rem 0;
 }
@@ -141,13 +150,14 @@ input[type="checkbox"] {
     float: right;
 
 }
-#todos>div>span {
+
+#todos>div>a {
     margin-left: 1rem;
     text-align: right;
 }
 
 /* Completed Todos */
-#completedTodos > div {
+#completedTodos>div {
     border-top: 1px solid var(--light);
     padding: 0.70rem 0;
 }
@@ -161,12 +171,14 @@ input[type="checkbox"] {
     float: right;
 
 }
-#completedTodos>div>span {
+
+#completedTodos>div>a {
     margin-left: 1rem;
     text-align: right;
 }
 
-.completed {
-    color: var(--light);
+div.completed>a>a {
+    color: var(--gray);
     text-decoration: line-through;
+
 }

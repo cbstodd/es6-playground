@@ -1,5 +1,6 @@
 /* ##################### FUNCTIONS ##################### */
-
+// let todos = getSavedTodos();
+// const filters = getFilters();
 /* -------------------------------------
     RENDERING / FILTERING
 -------------------------------------- */
@@ -39,6 +40,7 @@ const generateTodoDOM = (todo) => {
     const checkbox = document.createElement('input');
     const todoText = document.createElement('span');
     const deletedButton = document.createElement('button');
+    const editTodo = document.createElement('a');
 
     // Render todo checkbox
     checkbox.setAttribute('type', 'checkbox');
@@ -50,7 +52,11 @@ const generateTodoDOM = (todo) => {
 
     // Render the todo body
     todoText.textContent = todo.body;
-    todoEl.appendChild(todoText);
+    // todoEl.appendChild(todoText);
+
+    // Render todo as an editable link:
+    editTodo.innerHTML = `<a href="/edit.html#${todo.id}" title="Edit: ${todo.body}">${todo.body}</a>`;
+    todoEl.appendChild(editTodo);
 
     // Render the Delete button
     deletedButton.innerHTML = '<i class="fa fa-trash-alt fa-lg" title="Delete Todo"></i>';
@@ -70,6 +76,8 @@ const generateCompletedTodoDOM = (todo) => {
     const checkbox = document.createElement('input');
     const todoText = document.createElement('span');
     const deletedButton = document.createElement('button');
+    const todoEditLink = document.createElement('a');
+    // const loc = location.assign(`http://localhost:3000/edit.html#${todo.id}`);
 
     // Render todo checkbox
     checkbox.setAttribute('type', 'checkbox');
@@ -82,7 +90,11 @@ const generateCompletedTodoDOM = (todo) => {
 
     // Render the todo body
     todoText.textContent = todo.body;
-    todoEl.appendChild(todoText);
+    // todoEl.appendChild(todoText);
+
+    // Render Edit link with todo text:
+    todoEditLink.innerHTML = `<a href="/edit.html#${todo.id}">${todo.body}</a>`;
+    todoEl.appendChild(todoEditLink);
 
     // Render the Delete button
     deletedButton.innerHTML = '<i class="fa fa-trash-alt fa-lg" title="Delete Todo"></i>';
@@ -116,7 +128,6 @@ const alertBtnMsg = (_newTodoBody) => {
 /* -------------------------------------
     CRUD OPERATIONS
 -------------------------------------- */
-
 const addTodo = (todoBody) => {
     const _id = uuidv4();
     const newTodo = {
