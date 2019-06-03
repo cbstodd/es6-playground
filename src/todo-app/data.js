@@ -27,8 +27,7 @@ const getSavedTodos = () => {
     }
 };
 
-
-
+// ALERTS
 const renderAlertMsg = (msg, ...redirectPath) => {
     const alert = document.getElementById('alertMsg');
     alert.setAttribute('class', 'alert alert-success');
@@ -43,33 +42,3 @@ const renderAlertMsg = (msg, ...redirectPath) => {
         setTimeout(() => location.assign(`${redirectPath}`), 1550);
     }
 };
-
-
-// export function data() {
-//     return [{
-//             id: `${Math.floor((Math.random() * 1999999) + 1)}`,
-//             body: 'Make Coffee',
-//             completed: true
-//         },
-//         {
-//             id: `${Math.floor((Math.random() * 1999999) + 1)}`,
-//             body: 'Uncover porch cushions',
-//             completed: true
-//         },
-//         {
-//             id: `${Math.floor((Math.random() * 1999999) + 1)}`,
-//             body: 'Go for a walk at Quiet Waters',
-//             completed: false
-//         },
-//         {
-//             id: `${Math.floor((Math.random() * 1999999) + 1)}`,
-//             body: 'Study Web Flutter',
-//             completed: false
-//         },
-//         {
-//             id: `${Math.floor((Math.random() * 1999999) + 1)}`,
-//             body: 'Fill out ngConf expense report',
-//             completed: false
-//         },
-//     ];
-// }

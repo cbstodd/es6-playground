@@ -59,7 +59,7 @@ const generateTodoDOM = (todo) => {
     todoEl.appendChild(editTodo);
 
     // Render the Delete button
-    deletedButton.innerHTML = '<i class="fa fa-trash-alt fa-lg" title="Delete Todo"></i>';
+    deletedButton.innerHTML = '<i class="fa fa-trash-alt" title="Delete Todo"></i>';
     todoEl.appendChild(deletedButton);
     deletedButton.addEventListener('click', (e) => {
         deleteTodo(todo.id);
@@ -97,7 +97,7 @@ const generateCompletedTodoDOM = (todo) => {
     todoEl.appendChild(todoEditLink);
 
     // Render the Delete button
-    deletedButton.innerHTML = '<i class="fa fa-trash-alt fa-lg" title="Delete Todo"></i>';
+    deletedButton.innerHTML = '<i class="fa fa-trash-alt" title="Delete Todo"></i>';
     todoEl.appendChild(deletedButton);
     deletedButton.addEventListener('click', (e) => {
         deleteTodo(todo.id);
@@ -140,6 +140,7 @@ const addTodo = (todoBody) => {
     todos.push(newTodo);
     saveTodosToLocalStorage(todos);
     alertBtnMsg(todoBody);
+    renderAlertMsg(`${todoBody} was Added!`, '');
 };
 
 const deleteTodo = (id) => {

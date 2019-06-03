@@ -12,7 +12,6 @@ const todo = allTodos.find((_todo) => {
 if (todo === undefined) {
     location.assign('/');
 }
-
 // Grabs the current todo value and auto-loads into the input (kinda like ng FormControlName):
 todoBody.value = todo.body;
 
@@ -25,6 +24,24 @@ document.getElementById('updateTodoForm').addEventListener('submit', (e) => {
     } else {
         console.warn('No Todo was provided, please type a todo before adding.');
         alert('No Todo was provided, please type a todo before adding.');
+    }
+});
+
+window.addEventListener('storage', (e) => {
+    // Adds two way data-binding.
+    if (e.key === 'todos') {
+        allTodos = JSON.parse(e.newValue);
+        console.log('e.key', e.key);
+        console.log('allTodos', allTodos);
+
+        const todo = allTodos.find((_todo) => {
+            return _todo.id === todoId;
+        });
+
+        if (todo === undefined) {
+            location.assign('/');
+        }
+        todoBody.value = todo.body;
     }
 });
 

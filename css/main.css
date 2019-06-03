@@ -8,7 +8,7 @@
     --light: #d3d2c7;
     --lightest: #f1f1f1;
     --green: #3cbbb0;
-    --dark-red: #680000;
+    --dark-red: #C02928;
     --baby-blue: #69BAE0;
 }
 
@@ -183,14 +183,14 @@ div.completed>a>a {
 }
 
 p.alert {
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
-    font-size: 1;
+    font-size: 1.2;
     border-radius: 5px;
 }
 
 p.alert-success {
-    background-color: #D6DF9F;
-    color: rgb(123, 134, 58);
-    border: 1px solid rgb(215, 226, 140);
+    background-color: var(--green);
+    color: #123A36;
+    border: 1px solid var(--green);
 }
