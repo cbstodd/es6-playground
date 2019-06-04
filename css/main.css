@@ -194,3 +194,9 @@ p.alert-success {
     color: #123A36;
     border: 1px solid var(--green);
 }
+
+p.alert-danger {
+    background-color: var(--dark-red);
+    color: #400000;
+    border: 1px solid var(--dark-red);
+}

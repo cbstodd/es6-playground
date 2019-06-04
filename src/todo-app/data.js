@@ -1,10 +1,15 @@
 // ####################### DATA ##########################
 // Save todos to localStorage
 const saveTodosToLocalStorage = (todos) => {
-    if (todos) {
-        localStorage.setItem('todos', JSON.stringify(todos));
+    if (todos && typeof todos === 'object') {
+        try {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        } catch (e) {
+            return [];
+        }
     } else {
-        return null;
+        renderErrorMsg('Todo not saved/updated, was not a JSON object');
+        throw Error('Todos NOT saved/updated, was not a JSON object');
     }
 };
 
@@ -23,6 +28,7 @@ const getSavedTodos = () => {
     if (todosJSON !== null) {
         return JSON.parse(todosJSON);
     } else {
+        console.info('No todos available in storage');
         return [];
     }
 };
@@ -41,4 +47,14 @@ const renderAlertMsg = (msg, ...redirectPath) => {
         console.log(redirectPath);
         setTimeout(() => location.assign(`${redirectPath}`), 1550);
     }
+};
+
+const renderErrorMsg = (msg) => {
+    const alert = document.getElementById('alertMsg');
+    alert.setAttribute('class', 'alert alert-danger');
+    alert.innerHTML = `${msg}`;
+    setTimeout(() => {
+        alert.setAttribute('class', '');
+        alert.innerHTML = '';
+    }, 1500);
 };
