@@ -14,6 +14,7 @@
               href="https://pro.fontawesome.com/releases/v5.5.0/css/all.css"
               integrity="sha384-j8y0ITrvFafF4EkV1mPW0BKm6dp3c+J9Fky22Man50Ofxo2wNe5pT1oZejDH9/Dt"
               crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     </head>
 
     <body>
@@ -44,9 +45,12 @@
                         </label>
 
                         <select name="sort" id="sort">
+                            <option value="">-- Sort Todos --</option>
                             <option value="lastEdited">Last Edited</option>
-                            <option value="recentlyCreated">Recently Created</option>
-                            <option value="alphabetical">Alphabetical Order (A-Z)</option>
+                            <option value="recentlyCreated">Newest</option>
+                            <option value="oldestCreated">Oldest</option>
+                            <option value="alphabetical">Alphabetical (A-Z)</option>
+                            <option value="alphabeticalZA">Alphabetical (Z-A)</option>
                         </select>
                     </form>
 

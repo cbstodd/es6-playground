@@ -67,7 +67,7 @@ const updateTodo = (todoEditBody) => {
         body: todoEditBody,
         completed: todo.completed,
         createdAt: todo.createdAt,
-        updatedAt: `${new Date()}`
+        updatedAt: Date.now()
     };
 
     deleteTodo(todo.id);

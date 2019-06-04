@@ -134,8 +134,8 @@ const addTodo = (todoBody) => {
         id: `${_id}`,
         body: todoBody,
         completed: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: Date.now(),
+        updatedAt: Date.now()
     };
     todos.push(newTodo);
     saveTodosToLocalStorage(todos);
@@ -174,7 +174,7 @@ const toggleCompletedTodo = (id) => {
             body: todo[0].body,
             completed: true,
             createdAt: todo[0].createdAt,
-            updatedAt: new Date()
+            updatedAt: Date.now()
         };
 
         deleteTodo(id);
@@ -188,7 +188,7 @@ const toggleCompletedTodo = (id) => {
             body: todo[0].body,
             completed: false,
             createdAt: todo[0].createdAt,
-            updatedAt: new Date()
+            updatedAt: Date.now()
         };
 
         deleteTodo(id);
