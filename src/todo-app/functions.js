@@ -13,8 +13,6 @@ const renderTodos = (todos, filters) => {
         return searchTextMatch && hideCompletedMatch;
     });
 
-
-
     document.querySelector('#todos').innerHTML = '';
     filteredTodos.forEach((todo) => {
         if (!todo.completed) {
