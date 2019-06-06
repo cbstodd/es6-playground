@@ -23,7 +23,7 @@ const getWeather = () => {
     if (request.readyState === 4 && request.status === 200) {
         console.log(`The weather in ${data.name} is: ${data.weather[0].description} with the temperature of ${Math.floor(data.main.temp)}(F).`);
     } else if (request.status !== 200) {
-        throw Error(`The API URL was not found. a "${data.status}" status was received.`);
+        throw Error(`The API URL was not found. a "${request.status}" status was received.`);
     }
 };
 
